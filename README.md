@@ -3,7 +3,7 @@
 ### Clone the repo
 
 ```shell
-git clone https://github.com/bryanforbes/intern-angular
+git clone https://github.com/paras02121999/angular-crud-local.git
 cd angular-crud-local
 ```
 
