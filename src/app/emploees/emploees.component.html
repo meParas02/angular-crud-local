@@ -1,0 +1,71 @@
+<mat-card style="width: 30%">
+  <!-- <form [formGroup]="bookForm" (ngSubmit)="adduser()"> -->
+  <form [formGroup]="emploeeForm">
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput autocomplete="off" formControlName="id" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Full name</mat-label>
+      <input matInput autocomplete="off" formControlName="full_name" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Company name</mat-label>
+      <input matInput autocomplete="off" formControlName="company_name" />
+    </mat-form-field>
+    <br />
+    <mat-label>Timing:</mat-label><br/>
+    <mat-radio-group aria-label="Timing" formControlName="timing">
+      <mat-radio-button value="10:00 to 7:30">10:00 to 7:30</mat-radio-button>&nbsp;
+      <mat-radio-button value="8:00 to 5:30">8:00 to 5:30</mat-radio-button>&nbsp;
+      <mat-radio-button value="12:00 to 9:30">12:00 to 9:30</mat-radio-button>
+    </mat-radio-group>
+    <br /><br />
+
+    <mat-label>Tech-stack:</mat-label><br/>
+    <section class="example-section" formControlName="tech_stack">
+      <div *ngFor="let data of tech_stack">
+        <input type="checkbox" (change)="onChange($event)" [value]="data.value"/> {{ data.name }}<br>
+        <!-- <mat-checkbox (change)="onChange($event)" [value]="data.value"/>{{ data.name }}</mat-checkbox>&nbsp; -->
+      </div>
+    </section>
+
+    <span *ngIf="editUser; then edit; else add"></span>
+    <ng-template #add>
+      <button
+        mat-button
+        color="primary"
+        style="padding-left: 5px; margin-top: 15px"
+        (click)="adduser()">
+        Add user
+      </button>
+    </ng-template>
+    <ng-template #edit>
+      <button
+        mat-button
+        color="primary"
+        style="padding-left: 5px; margin-top: 15px"
+        (click)="updateUser(userId)">
+        Edit user
+      </button>
+    </ng-template>
+  </form>
+</mat-card>
+
+<mat-grid-list cols="1" rowHeight="50px">
+  <div *ngFor="let emploee of emploeeData">
+    <mat-grid-tile>
+      Title: {{ emploee.id }} | Discription: {{ emploee.full_name }} | Published:
+      {{ emploee.company_name }} | {{ emploee.timing }}
+
+      <button mat-button color="accent" (click)="getOneUser(emploee.id)">
+        Edit
+      </button>
+      <button mat-button color="warn" (click)="deleteUser(emploee.id)">
+        Delete
+      </button>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>
